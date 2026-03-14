@@ -190,189 +190,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Architect | Prafulla</title>
+    <title>Prafulla | DevOps Console</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
         
-        body { 
-            font-family: 'Space Grotesk', sans-serif; 
-            background-color: #0f172a;
-            background-image: 
-                linear-gradient(rgba(30, 41, 59, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(30, 41, 59, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        .mono { font-family: 'JetBrains Mono', monospace; }
+        :root { --primary: #4ade80; --bg: #020617; }
+        body { font-family: 'JetBrains Mono', monospace; background-color: var(--bg); color: #cbd5e1; }
 
-        /* --- Animations --- */
+        /* Terminal Styling */
+        .terminal-window { background: #0f172a; border: 1px solid #334155; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .cursor { display: inline-block; width: 8px; height: 18px; background: var(--primary); animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Glowing Tech Stack */
+        .tech-pill { transition: all 0.3s; border: 1px solid #1e293b; position: relative; overflow: hidden; }
+        .tech-pill:hover { border-color: var(--primary); box-shadow: 0 0 15px rgba(74, 222, 128, 0.2); transform: translateY(-2px); }
         
-        /* Typing Effect */
-        .typing-wrapper {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid #4ade80;
-            animation: typing 3.5s steps(40, end), blink 0.8s step-end infinite;
-        }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink { 50% { border-color: transparent } }
-
         /* Scared Button */
-        .scared-button:hover {
-            transform: translate(120px, -40px) rotate(15deg);
-            background-color: #ef4444 !important;
-        }
+        .scared-btn { transition: all 0.2s ease-out; }
 
-        /* Scanning Line */
-        @keyframes scan {
-            0% { transform: translateY(-100%); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(100%); opacity: 0; }
-        }
-        .scan-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(74, 222, 128, 0.1) 50%, transparent 100%);
-            animation: scan 4s linear infinite;
-        }
+        /* Achievement Card Glow */
+        .award-card:hover { background: linear-gradient(145deg, #0f172a, #1e293b); }
 
-        /* Hologram Entry */
-        .hologram-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .hologram-in.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Shake Effect */
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            25% { transform: translate(-1px, -1px) rotate(-1deg); }
-            75% { transform: translate(1px, -1px) rotate(1deg); }
-            100% { transform: translate(1px, 1px) rotate(0deg); }
-        }
-        .shake:hover { animation: shake 0.3s infinite; }
+        /* Scroll Progress Bar */
+        #progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--primary); z-index: 100; transition: width 0.1s; }
     </style>
 </head>
-<body class="text-slate-200 overflow-x-hidden">
+<body class="selection:bg-green-500/30">
 
-    <header class="py-24 px-6 text-center bg-slate-900 border-b border-slate-800 relative">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-6xl font-extrabold text-white mb-6">
-                <span class="text-green-400 mono">&gt;</span> Prafulla <span class="animate-pulse">_</span>
-            </h1>
-            <div class="text-2xl text-slate-300 mono h-8 mb-6">
-                <span class="typing-wrapper">DevOps Engineer && Cloud Architect</span>
+    <div id="progress" style="width: 0%"></div>
+
+    <header class="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none" id="matrix-bg"></div>
+        
+        <div class="terminal-window w-full max-w-3xl rounded-lg overflow-hidden border border-slate-700">
+            <div class="bg-slate-800 px-4 py-2 flex items-center gap-2 border-b border-slate-700">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="text-xs text-slate-400 ml-2">prafulla@devops-prod:~</span>
             </div>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                Automating the <span class="text-red-400 font-bold">chaos</span> out of production systems. 
-                I turn "It works on my machine" into "It works in the cluster."
-            </p>
-            
-            <div class="mt-10 h-12">
-                <button class="scared-button transition-all duration-300 bg-blue-600 text-white px-8 py-3 rounded-md font-bold mono shadow-xl">
-                    Deploy to Prod on Friday
-                </button>
+            <div class="p-6 text-sm md:text-base leading-relaxed">
+                <div class="mb-4">
+                    <span class="text-green-400">guest@internet:~$</span> <span id="typing-line"></span><span class="cursor"></span>
+                </div>
+                <div id="terminal-output" class="space-y-2 opacity-0 transition-opacity duration-1000">
+                    <p class="text-blue-400 font-bold text-xl">NAME: Prafulla</p>
+                    <p class="text-slate-400 italic">ROLE: DevOps Architect / Cloud Automation Specialist</p>
+                    <p class="text-yellow-500 mt-4">[!] Alert: Unmanaged chaos detected. Initiating automation...</p>
+                    <div class="flex gap-4 mt-6">
+                        <button onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})" class="text-green-400 border border-green-400 px-3 py-1 hover:bg-green-400 hover:text-black transition-all">view_experience()</button>
+                        <button onclick="alert('Connection Secure: Protocol AES-256 Enabled')" class="text-slate-500 border border-slate-700 px-3 py-1 hover:border-slate-400 transition-all">ssh_connect</button>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <button id="runaway" class="scared-btn bg-red-900/20 border border-red-500 text-red-500 px-6 py-2 rounded text-xs uppercase tracking-widest font-bold">
+                Force Deploy to Production
+            </button>
+            <p class="text-[10px] text-slate-500 mt-2 italic">Note: Only for the brave.</p>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-20 space-y-24">
+    <main class="max-w-5xl mx-auto px-6 py-20 space-y-32">
 
-        <section class="hologram-in relative p-10 bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden">
-            <div class="scan-overlay"></div>
-            <h2 class="text-3xl font-bold text-white mb-8 mono flex items-center">
-                <i class="fas fa-terminal mr-4 text-green-400"></i> Technical Core
+        <section id="skills" class="scroll-mt-20">
+            <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <span class="text-green-400">01.</span> /bin/stack <i class="fas fa-microchip text-slate-500"></i>
             </h2>
-            <div class="flex flex-wrap gap-4">
-                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">Terraform</span>
-                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">Kubernetes</span>
-                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">Docker</span>
-                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">AWS / Azure</span>
-                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">Ansible</span>
-                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">GitHub Actions</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="tech-grid">
+                <div class="tech-pill p-4 rounded bg-slate-900/50 group" onmouseover="logAction('Analyzing Terraform State...')">
+                    <i class="fab fa-aws text-2xl mb-2 text-slate-500 group-hover:text-orange-400"></i>
+                    <p class="text-sm font-bold">Terraform</p>
+                </div>
+                <div class="tech-pill p-4 rounded bg-slate-900/50 group" onmouseover="logAction('Scaling K8s Replicas...')">
+                    <i class="fas fa-dharmachakra text-2xl mb-2 text-slate-500 group-hover:text-blue-400"></i>
+                    <p class="text-sm font-bold">Kubernetes</p>
+                </div>
+                <div class="tech-pill p-4 rounded bg-slate-900/50 group" onmouseover="logAction('Pulling Docker Images...')">
+                    <i class="fab fa-docker text-2xl mb-2 text-slate-500 group-hover:text-cyan-400"></i>
+                    <p class="text-sm font-bold">Docker</p>
+                </div>
+                <div class="tech-pill p-4 rounded bg-slate-900/50 group" onmouseover="logAction('Updating Ansible Playbook...')">
+                    <i class="fas fa-server text-2xl mb-2 text-slate-500 group-hover:text-red-400"></i>
+                    <p class="text-sm font-bold">Ansible</p>
+                </div>
             </div>
         </section>
 
-        <section class="hologram-in">
-            <h2 class="text-3xl font-bold text-white mb-10 mono flex items-center">
-                <i class="fas fa-trophy mr-4 text-yellow-500"></i> Career Commits
+        <section id="awards">
+            <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <span class="text-green-400">02.</span> /mnt/achievements <i class="fas fa-trophy text-slate-500"></i>
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="group bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-yellow-500 transition-all duration-300 relative overflow-hidden">
-                    <i class="fas fa-star absolute -right-4 -top-4 text-6xl text-yellow-500/10 group-hover:text-yellow-500/20"></i>
-                    <h3 class="text-xl font-bold text-white flex items-center">
-                        <i class="fas fa-award mr-3 text-yellow-500"></i> Star Performer Award
-                    </h3>
-                    <p class="text-slate-400 mt-2 text-sm mono">Acknowledged for peak performance during critical system upgrades.</p>
+                <div class="award-card p-6 bg-slate-900 border border-slate-800 rounded-lg transition-all hover:border-yellow-500 group cursor-crosshair">
+                    <span class="text-[10px] text-slate-500 block mb-2">ID: AWRD-2023-01</span>
+                    <h3 class="text-lg font-bold text-slate-200 group-hover:text-yellow-500">Star Performer Award</h3>
+                    <p class="text-sm text-slate-500 mt-2">Critical infrastructure reliability peak performance.</p>
                 </div>
-
-                <div class="group bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition-all duration-300 relative overflow-hidden">
-                    <i class="fas fa-cloud-upload-alt absolute -right-4 -top-4 text-6xl text-blue-500/10 group-hover:text-blue-500/20"></i>
-                    <h3 class="text-xl font-bold text-white flex items-center">
-                        <i class="fas fa-rocket mr-3 text-blue-400"></i> Migration Excellence
-                    </h3>
-                    <p class="text-slate-400 mt-2 text-sm mono">Zero-downtime migration champion for cloud infrastructure.</p>
-                </div>
-
-                <div class="group bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-all duration-300 relative overflow-hidden">
-                    <i class="fas fa-shield-alt absolute -right-4 -top-4 text-6xl text-purple-500/10 group-hover:text-purple-500/20"></i>
-                    <h3 class="text-xl font-bold text-white flex items-center">
-                        <i class="fas fa-fingerprint mr-3 text-purple-400"></i> Ownership Award
-                    </h3>
-                    <p class="text-slate-400 mt-2 text-sm mono">Taking absolute responsibility for platform reliability.</p>
-                </div>
-
-                <div class="group bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-green-500 transition-all duration-300 relative overflow-hidden">
-                    <i class="fas fa-user-check absolute -right-4 -top-4 text-6xl text-green-500/10 group-hover:text-green-500/20"></i>
-                    <h3 class="text-xl font-bold text-white flex items-center">
-                        <i class="fas fa-handshake mr-3 text-green-400"></i> Service Commitment
-                    </h3>
-                    <p class="text-slate-400 mt-2 text-sm mono">Unwavering dedication to service uptime and team support.</p>
+                <div class="award-card p-6 bg-slate-900 border border-slate-800 rounded-lg transition-all hover:border-blue-500 group cursor-crosshair">
+                    <span class="text-[10px] text-slate-500 block mb-2">ID: AWRD-2023-04</span>
+                    <h3 class="text-lg font-bold text-slate-200 group-hover:text-blue-500">Migration Excellence</h3>
+                    <p class="text-sm text-slate-500 mt-2">Successfully migrated legacy monolith to Cloud Native.</p>
                 </div>
             </div>
         </section>
 
-        <section class="hologram-in">
-            <h2 class="text-3xl font-bold text-white mb-10 mono flex items-center">
-                <i class="fas fa-history mr-4 text-blue-400"></i> Experience.log
+        <section id="experience" class="scroll-mt-20">
+            <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <span class="text-green-400">03.</span> /var/log/experience <i class="fas fa-history text-slate-500"></i>
             </h2>
-            <div class="border-l-4 border-slate-700 pl-8 space-y-12">
-                <div class="relative bg-slate-800 p-8 rounded-xl border border-slate-700 hover:border-green-500 transition-all">
-                    <div class="absolute -left-[46px] top-8 w-5 h-5 bg-slate-900 border-4 border-green-500 rounded-full"></div>
-                    <h3 class="text-2xl font-bold text-white">Senior DevOps Engineer</h3>
-                    <p class="text-blue-400 mono">Company Name | 2022 - Present</p>
-                    <ul class="mt-4 space-y-2 text-slate-400 text-sm mono">
-                        <li>- Built automated CI/CD pipelines reducing lead time by 50%.</li>
-                        <li>- Orchestrated multi-region K8s clusters.</li>
-                    </ul>
+            <div class="space-y-12 border-l border-slate-800 ml-4 pl-8">
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-1 w-5 h-5 bg-green-500 rounded-full border-4 border-slate-950"></div>
+                    <h3 class="text-xl font-bold">Senior DevOps Engineer</h3>
+                    <p class="text-green-400 text-xs mb-4">Tech Solutions Inc. | 2022 - Present</p>
+                    <p class="text-sm text-slate-400 max-w-xl">Architected CI/CD pipelines using GitHub Actions and Jenkins, reducing manual deployment efforts by 80%.</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="py-12 text-center border-t border-slate-800 bg-slate-950">
-        <p class="text-slate-500 mono text-sm">
-            Status: <span class="text-green-500">Ready</span> | 
-            Built with <span class="text-red-500">YAML & Tears</span> | 
-            Hosted on GitHub
-        </p>
+    <footer class="bg-slate-950 border-t border-slate-800 p-4 fixed bottom-0 w-full z-50 flex justify-between items-center px-8">
+        <div class="text-[10px] text-green-500 mono flex items-center gap-4">
+            <span class="animate-pulse">● LIVE_SYSTEM_LOG:</span>
+            <span id="system-log" class="text-slate-500 italic uppercase">Initializing kernel...</span>
+        </div>
+        <div class="text-[10px] text-slate-600 hidden md:block">
+            IP: 127.0.0.1 | CPU: 2% | UPTIME: 99.9%
+        </div>
     </footer>
 
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
+        // Typing Effect Logic
+        const text = "whoami --info --detailed";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typing-line").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                document.getElementById("terminal-output").style.opacity = "1";
+            }
+        }
+        window.onload = typeWriter;
 
-        document.querySelectorAll('.hologram-in').forEach(el => observer.observe(el));
+        // Runaway Button Logic
+        const runBtn = document.getElementById('runaway');
+        runBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - runBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - runBtn.offsetHeight);
+            runBtn.style.position = 'absolute';
+            runBtn.style.left = `${x}px`;
+            runBtn.style.top = `${y}px`;
+            logAction('ALERT: ACCESS DENIED - Deployment Blocked!');
+        });
+
+        // Live Log Updates
+        function logAction(msg) {
+            document.getElementById('system-log').innerText = msg;
+        }
+
+        // Scroll Progress
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress").style.width = scrolled + "%";
+        };
     </script>
 </body>
 </html>
