@@ -185,51 +185,194 @@
 </body>
 </html> -->
 
-<section class="hologram-in">
-            <h2 class="text-3xl font-bold text-white mb-10 flex items-center mono glitch-hover">
-                <i class="fas fa-trophy mr-4 text-yellow-400"></i> System Achievements
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Architect | Prafulla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap');
+        
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background-color: #0f172a;
+            background-image: 
+                linear-gradient(rgba(30, 41, 59, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 41, 59, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* --- Animations --- */
+        
+        /* Typing Effect */
+        .typing-wrapper {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #4ade80;
+            animation: typing 3.5s steps(40, end), blink 0.8s step-end infinite;
+        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink { 50% { border-color: transparent } }
+
+        /* Scared Button */
+        .scared-button:hover {
+            transform: translate(120px, -40px) rotate(15deg);
+            background-color: #ef4444 !important;
+        }
+
+        /* Scanning Line */
+        @keyframes scan {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        .scan-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(74, 222, 128, 0.1) 50%, transparent 100%);
+            animation: scan 4s linear infinite;
+        }
+
+        /* Hologram Entry */
+        .hologram-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hologram-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Shake Effect */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            25% { transform: translate(-1px, -1px) rotate(-1deg); }
+            75% { transform: translate(1px, -1px) rotate(1deg); }
+            100% { transform: translate(1px, 1px) rotate(0deg); }
+        }
+        .shake:hover { animation: shake 0.3s infinite; }
+    </style>
+</head>
+<body class="text-slate-200 overflow-x-hidden">
+
+    <header class="py-24 px-6 text-center bg-slate-900 border-b border-slate-800 relative">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-6xl font-extrabold text-white mb-6">
+                <span class="text-green-400 mono">&gt;</span> Prafulla <span class="animate-pulse">_</span>
+            </h1>
+            <div class="text-2xl text-slate-300 mono h-8 mb-6">
+                <span class="typing-wrapper">DevOps Engineer && Cloud Architect</span>
+            </div>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                Automating the <span class="text-red-400 font-bold">chaos</span> out of production systems. 
+                I turn "It works on my machine" into "It works in the cluster."
+            </p>
+            
+            <div class="mt-10 h-12">
+                <button class="scared-button transition-all duration-300 bg-blue-600 text-white px-8 py-3 rounded-md font-bold mono shadow-xl">
+                    Deploy to Prod on Friday
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-20 space-y-24">
+
+        <section class="hologram-in relative p-10 bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden">
+            <div class="scan-overlay"></div>
+            <h2 class="text-3xl font-bold text-white mb-8 mono flex items-center">
+                <i class="fas fa-terminal mr-4 text-green-400"></i> Technical Core
+            </h2>
+            <div class="flex flex-wrap gap-4">
+                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">Terraform</span>
+                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">Kubernetes</span>
+                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">Docker</span>
+                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">AWS / Azure</span>
+                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">Ansible</span>
+                <span class="shake px-5 py-2 bg-slate-900 border border-green-900 text-green-400 mono rounded cursor-default">GitHub Actions</span>
+            </div>
+        </section>
+
+        <section class="hologram-in">
+            <h2 class="text-3xl font-bold text-white mb-10 mono flex items-center">
+                <i class="fas fa-trophy mr-4 text-yellow-500"></i> Career Commits
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
                 <div class="group bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-yellow-500 transition-all duration-300 relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 text-6xl text-yellow-500/10 group-hover:text-yellow-500/20 transition-colors">
-                        <i class="fas fa-star"></i>
-                    </div>
+                    <i class="fas fa-star absolute -right-4 -top-4 text-6xl text-yellow-500/10 group-hover:text-yellow-500/20"></i>
                     <h3 class="text-xl font-bold text-white flex items-center">
                         <i class="fas fa-award mr-3 text-yellow-500"></i> Star Performer Award
                     </h3>
-                    <p class="text-slate-400 mt-2 text-sm mono">Recognized for exceptional contribution to core infrastructure stability and performance.</p>
+                    <p class="text-slate-400 mt-2 text-sm mono">Acknowledged for peak performance during critical system upgrades.</p>
                 </div>
 
                 <div class="group bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition-all duration-300 relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 text-6xl text-blue-500/10 group-hover:text-blue-500/20 transition-colors">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
+                    <i class="fas fa-cloud-upload-alt absolute -right-4 -top-4 text-6xl text-blue-500/10 group-hover:text-blue-500/20"></i>
                     <h3 class="text-xl font-bold text-white flex items-center">
                         <i class="fas fa-rocket mr-3 text-blue-400"></i> Migration Excellence
                     </h3>
-                    <p class="text-slate-400 mt-2 text-sm mono">Led the successful zero-downtime migration of 200+ microservices to Cloud Native architecture.</p>
+                    <p class="text-slate-400 mt-2 text-sm mono">Zero-downtime migration champion for cloud infrastructure.</p>
                 </div>
 
                 <div class="group bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-all duration-300 relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 text-6xl text-purple-500/10 group-hover:text-purple-500/20 transition-colors">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
+                    <i class="fas fa-shield-alt absolute -right-4 -top-4 text-6xl text-purple-500/10 group-hover:text-purple-500/20"></i>
                     <h3 class="text-xl font-bold text-white flex items-center">
                         <i class="fas fa-fingerprint mr-3 text-purple-400"></i> Ownership Award
                     </h3>
-                    <p class="text-slate-400 mt-2 text-sm mono">Awarded for taking end-to-end accountability for production security and incident response.</p>
+                    <p class="text-slate-400 mt-2 text-sm mono">Taking absolute responsibility for platform reliability.</p>
                 </div>
 
                 <div class="group bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-green-500 transition-all duration-300 relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 text-6xl text-green-500/10 group-hover:text-green-500/20 transition-colors">
-                        <i class="fas fa-user-check"></i>
-                    </div>
+                    <i class="fas fa-user-check absolute -right-4 -top-4 text-6xl text-green-500/10 group-hover:text-green-500/20"></i>
                     <h3 class="text-xl font-bold text-white flex items-center">
                         <i class="fas fa-handshake mr-3 text-green-400"></i> Service Commitment
                     </h3>
-                    <p class="text-slate-400 mt-2 text-sm mono">Acknowledged for unwavering dedication to system uptime and supporting the engineering team.</p>
+                    <p class="text-slate-400 mt-2 text-sm mono">Unwavering dedication to service uptime and team support.</p>
                 </div>
-
             </div>
         </section>
+
+        <section class="hologram-in">
+            <h2 class="text-3xl font-bold text-white mb-10 mono flex items-center">
+                <i class="fas fa-history mr-4 text-blue-400"></i> Experience.log
+            </h2>
+            <div class="border-l-4 border-slate-700 pl-8 space-y-12">
+                <div class="relative bg-slate-800 p-8 rounded-xl border border-slate-700 hover:border-green-500 transition-all">
+                    <div class="absolute -left-[46px] top-8 w-5 h-5 bg-slate-900 border-4 border-green-500 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Senior DevOps Engineer</h3>
+                    <p class="text-blue-400 mono">Company Name | 2022 - Present</p>
+                    <ul class="mt-4 space-y-2 text-slate-400 text-sm mono">
+                        <li>- Built automated CI/CD pipelines reducing lead time by 50%.</li>
+                        <li>- Orchestrated multi-region K8s clusters.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 text-center border-t border-slate-800 bg-slate-950">
+        <p class="text-slate-500 mono text-sm">
+            Status: <span class="text-green-500">Ready</span> | 
+            Built with <span class="text-red-500">YAML & Tears</span> | 
+            Hosted on GitHub
+        </p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.hologram-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
