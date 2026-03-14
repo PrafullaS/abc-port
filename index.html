@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -69,6 +69,116 @@
     <footer class="py-10 text-center border-t border-slate-800 mt-10">
         <p class="text-slate-500 text-sm">
             Built with 💻 and hosted on GitHub Pages.
+        </p>
+    </footer>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Portfolio | Prafulla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Humorous "Runaway" Button Animation */
+        .scared-button:hover {
+            transform: translate(150px, -50px) rotate(20deg);
+            background-color: #ef4444 !important;
+        }
+        
+        /* Floating Icons like unmanaged Docker containers */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-icon { animation: float 3s ease-in-out infinite; }
+
+        /* The "It works on my machine" shake */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(-1deg); }
+            40% { transform: translate(3px, 2px) rotate(1deg); }
+            100% { transform: translate(1px, 1px) rotate(0deg); }
+        }
+        .shake-on-hover:hover { animation: shake 0.5s infinite; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 font-sans leading-relaxed overflow-x-hidden">
+
+    <header class="py-20 px-6 text-center bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-700 relative">
+        <div class="absolute top-10 right-10 opacity-20 text-6xl float-icon">
+            <i class="fab fa-docker text-blue-400"></i>
+        </div>
+        
+        <h1 class="text-5xl font-extrabold text-white mb-4 tracking-tight">
+            <span class="text-blue-400">&gt;</span> Prafulla <span class="animate-pulse">_</span>
+        </h1>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+            DevOps Engineer. I turn <span class="text-red-400 font-mono">"It works on my machine"</span> into <span class="text-green-400 font-mono">"It works in the cloud."</span>
+        </p>
+
+        <div class="mt-8 h-16">
+            <button class="scared-button transition-all duration-300 bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg">
+                Deploy to Production on Friday
+            </button>
+            <p class="text-xs text-slate-500 mt-2">(Try to click it, I dare you)</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-20">
+
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-tools mr-3 text-blue-400"></i> My Toolbox (Mostly YAML)
+            </h2>
+            <div class="flex flex-wrap gap-3">
+                <span class="shake-on-hover px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm cursor-pointer">Terraform</span>
+                <span class="shake-on-hover px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm cursor-pointer">Kubernetes</span>
+                <span class="shake-on-hover px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm cursor-pointer">Docker</span>
+                <span class="shake-on-hover px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm cursor-pointer">AWS / Azure</span>
+                <span class="shake-on-hover px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm cursor-pointer">Ansible</span>
+                <span class="shake-on-hover px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm cursor-pointer">Jenkins</span>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-fire-extinguisher mr-3 text-blue-400"></i> Firefighting Experience
+            </h2>
+            <div class="space-y-8 border-l-2 border-slate-700 pl-6 ml-1">
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-1 w-4 h-4 bg-blue-500 rounded-full group-hover:bg-red-500 transition-colors"></div>
+                    <h3 class="text-lg font-bold">Senior DevOps Engineer</h3>
+                    <p class="text-blue-400 text-sm mb-2">Company Name | 2022 - Present</p>
+                    <ul class="list-disc list-inside text-slate-400 text-sm space-y-1">
+                        <li>Successfully automated myself out of 3 meetings a week.</li>
+                        <li>Converted "Emergency" Slack messages into "Resolved" tickets.</li>
+                        <li>Managed Kubernetes clusters without losing my sanity (mostly).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-graduation-cap mr-3 text-blue-400"></i> Education
+            </h2>
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition-colors">
+                <h3 class="text-lg font-bold text-white">B.E. in Computer Science</h3>
+                <p class="text-slate-400 text-sm">Learned how things work. Now I spend my time figuring out why they don't.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-10 text-center border-t border-slate-800 mt-10">
+        <p class="text-slate-500 text-sm">
+            Warning: This site was deployed with <code class="text-blue-400">--force</code>
         </p>
     </footer>
 
