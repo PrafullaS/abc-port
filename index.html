@@ -1,7 +1,76 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>Hello World!</h1>
-    <p>My first site hosted on GitHub.</p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Portfolio | Prafulla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-slate-200 font-sans leading-relaxed">
+
+    <header class="py-20 px-6 text-center bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-700">
+        <h1 class="text-5xl font-extrabold text-white mb-4 tracking-tight">
+            <span class="text-blue-400">&gt;</span> Prafulla <span class="animate-pulse">_</span>
+        </h1>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+            DevOps Engineer specialized in automating infrastructure, CI/CD pipelines, and cloud-native solutions.
+        </p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-20">
+
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-tools mr-3 text-blue-400"></i> Technical Stack
+            </h2>
+            <div class="flex flex-wrap gap-3">
+                <span class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm">Terraform</span>
+                <span class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm">Kubernetes (K8s)</span>
+                <span class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm">Docker</span>
+                <span class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm">AWS / Azure</span>
+                <span class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm">GitHub Actions / Jenkins</span>
+                <span class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm">Ansible</span>
+                <span class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm">Python / Bash</span>
+                <span class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm">Prometheus & Grafana</span>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-briefcase mr-3 text-blue-400"></i> Experience
+            </h2>
+            <div class="space-y-8 border-l-2 border-slate-700 pl-6 ml-1">
+                <div class="relative">
+                    <div class="absolute -left-[31px] top-1 w-4 h-4 bg-blue-500 rounded-full"></div>
+                    <h3 class="text-lg font-bold">Senior DevOps Engineer</h3>
+                    <p class="text-blue-400 text-sm mb-2">Company Name | 2022 - Present</p>
+                    <ul class="list-disc list-inside text-slate-400 text-sm space-y-1">
+                        <li>Migrated legacy infrastructure to AWS using Terraform (IaC).</li>
+                        <li>Reduced deployment time by 40% using optimized CI/CD pipelines.</li>
+                        <li>Managed 50+ microservices on Amazon EKS clusters.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-graduation-cap mr-3 text-blue-400"></i> Education
+            </h2>
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                <h3 class="text-lg font-bold text-white">Bachelor of Engineering in Computer Science</h3>
+                <p class="text-slate-400">University Name | Graduated 2021</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-10 text-center border-t border-slate-800 mt-10">
+        <p class="text-slate-500 text-sm">
+            Built with 💻 and hosted on GitHub Pages.
+        </p>
+    </footer>
+
+</body>
 </html>
